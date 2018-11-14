@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import subprocess
 import os
 import time
@@ -8,12 +8,16 @@ app = Flask(__name__)
 app.debug = True
 
 
-@app.route('/')
-def index():
+@app.route('/login')
+def login():
     wifi_ap_array = scan_wifi_networks()
 
     return render_template('app.html', wifi_ap_array = wifi_ap_array)
 
+@app.route('/', defaults={'path':''})
+@app.route('/<path:path>')
+def index(path):
+    return redirect("http://login.com/login")
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
@@ -56,32 +60,32 @@ def scan_wifi_networks():
     return ap_array
 
 def create_wpa_supplicant(ssid, wifi_key):
-    temp_conf_file = open('wpa_supplicant.conf.tmp', 'w')
+    temp_conf_file = open('interfaces', 'w')
 
-    temp_conf_file.write('ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n')
-    temp_conf_file.write('update_config=1\n')
+    temp_conf_file.write('auto lo\n')
+    temp_conf_file.write('iface lo inet loopback\n')
     temp_conf_file.write('\n')
-    temp_conf_file.write('network={\n')
-    temp_conf_file.write('	ssid="' + ssid + '"\n')
-
-    if wifi_key == '':
-        temp_conf_file.write('	key_mgmt=NONE\n')
-    else:
-        temp_conf_file.write('	psk="' + wifi_key + '"\n')
-
-    temp_conf_file.write('	}')
-
+    temp_conf_file.write('iface usb0 inet static\n')
+    temp_conf_file.write('address 192.168.7.2\n')
+    temp_conf_file.write('netmask 255.255.255.252\n')
+    temp_conf_file.write('network 192.168.7.0\n')
+    temp_conf_file.write('gateway 192.168.7.1\n')
+    temp_conf_file.write('\n')
+    temp_conf_file.write('auto wlan0\n')
+    temp_conf_file.write('iface wlan0 inet dhcp\n')
+    temp_conf_file.write('wpa-ssid' + ssid + '\n')
+    temp_conf_file.write('wpa-psk' + wifi_key + '\n')
     temp_conf_file.close
 
-    os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+    os.system('mv interfaces /etc/network/interfaces')
 
 def set_ap_client_mode():
     os.system('rm /etc/cron.raspiwifi/aphost_bootstrapper')
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
     os.system('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
-    os.system('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
+    os.system('mv /etc/network/interfaces.original /etc/network/interfaces')
+    #os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     os.system('reboot')
 
 def config_file_hash():
