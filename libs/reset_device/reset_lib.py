@@ -23,12 +23,12 @@ def hostapd_reset_check(ssid_prefix):
 
 	return reset_required
 
-def update_hostapd(ssid_prefix, serial_last_four):
+def update_hostapd(ssid_prefix):
 	os.system('cp -a /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
 
 	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
 		for line in file:
-			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
+			print(line.replace("beaglebone", ssid_prefix), end='')
 			file.close
 
 def is_wifi_active():
@@ -41,15 +41,14 @@ def is_wifi_active():
 	return wifi_active
 
 def reset_to_host_mode():
-	os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
+	#os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-	os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
+	#os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
 	os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi/')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
-	os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
+	os.system('mv /etc/network/interfaces /etc/network/interfaces.original')
+	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/netowrk/')
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
 	os.system('reboot')
