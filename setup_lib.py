@@ -4,11 +4,11 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
-	os.system('apt install python3 python3-rpi.gpio python3-pip dnsmasq hostapd -y')
+	os.system('apt install python3 python3-pip dnsmasq hostapd -y')
 	os.system('clear')
 	print("Installing Flask web server...")
 	print()
-	os.system('pip3 install flask pyopenssl')
+	os.system('pip3 install flask')
 	os.system('clear')
 
 def copy_configs():
@@ -20,13 +20,13 @@ def copy_configs():
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
-	os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
+	os.system('mv /etc/network/interfaces /etc/network/interfaces.original')
+	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/network/')
 	os.system('mkdir /etc/cron.raspiwifi')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
 	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
-	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
+	#os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 
 def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice):
