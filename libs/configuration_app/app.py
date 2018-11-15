@@ -22,7 +22,7 @@ def scan_wifi_networks():
 
 os.system('iwconfig wlan0 mode Managed')
 wifi_scan=scan_wifi_networks()
-os.system('/etc/init.d/hostapd reset')
+os.system('/etc/init.d/hostapd restart')
 
 @app.route('/login')
 def login():
