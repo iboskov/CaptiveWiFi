@@ -27,9 +27,10 @@ this release.
 
 TODO BEFORE RUNNING initial_setup.py
 
-== Run: apt-get install isc-dhcp-server
-== To get an ip address to the device that connects to the access point, in /etc/dhcpd.conf add these lines at the bottom:
-
+== Run: apt-get update 
+        apt-get install isc-dhcp-server
+        
+== To get an ip address to the device that connects to the access point, in /etc/dhcp/dhcpd.conf add these lines at the bottom:
 subnet 10.0.0.0 netmask 255.255.255.0 {
   range 10.0.0.10 10.0.0.15;
 }
@@ -39,7 +40,7 @@ nameserver 127.0.0.1
 nameserver 8.8.8.8
 
 == To start hostapd with the specified Access Point name upon booting the system, in /etc/default/hostapd uncomment and add this line:
-DAEMON_CONF=/etc/hostapd/hostapd.conf
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
  SCRIPT-BASED INSTALLATION INSTRUCTIONS:
 
