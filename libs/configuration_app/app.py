@@ -7,11 +7,28 @@ from threading import Thread
 app = Flask(__name__)
 app.debug = True
 
+def scan_wifi_networks():
+    iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
+    ap_list, err = iwlist_raw.communicate()
+    ap_array = []
+
+    for line in ap_list.decode('utf-8').rsplit('\n'):
+        if 'ESSID' in line:
+            ap_ssid = line[27:-1]
+            if ap_ssid != '':
+                ap_array.append(ap_ssid)
+                
+    return ap_array
+
+os.system('iwconfig wlan0 mode Managed')
+wifi_scan=scan_wifi_networks()
+os.system('/etc/init.d/hostapd reset')
 
 @app.route('/login')
 def login():
-    wifi_ap_array = scan_wifi_networks()
-
+    #os.system('iwconfig wlan0 mode Managed')
+    #wifi_ap_array = scan_wifi_networks()
+    #os.system('/etc/init.d/hostapd restart')
     return render_template('app.html', wifi_ap_array = wifi_ap_array)
 
 @app.route('/', defaults={'path':''})
@@ -46,18 +63,18 @@ def save_credentials():
 
 ######## FUNCTIONS ##########
 
-def scan_wifi_networks():
-    iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
-    ap_list, err = iwlist_raw.communicate()
-    ap_array = []
+#def scan_wifi_networks():
+    #iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
+    #ap_list, err = iwlist_raw.communicate()
+    #ap_array = []
 
-    for line in ap_list.decode('utf-8').rsplit('\n'):
-        if 'ESSID' in line:
-            ap_ssid = line[27:-1]
-            if ap_ssid != '':
-                ap_array.append(ap_ssid)
+    #for line in ap_list.decode('utf-8').rsplit('\n'):
+        #if 'ESSID' in line:
+            #ap_ssid = line[27:-1]
+            #if ap_ssid != '':
+                #ap_array.append(ap_ssid)
 
-    return ap_array
+    #return ap_array
 
 def create_wpa_supplicant(ssid, wifi_key):
     temp_conf_file = open('interfaces', 'w')
