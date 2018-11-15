@@ -4,7 +4,7 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
-	os.system('apt install python3 python3-pip dnsmasq hostapd -y')
+	os.system('apt install python3 python3-pip isc-dhcp-server dnsmasq hostapd -y')
 	os.system('clear')
 	print("Installing Flask web server...")
 	print()
