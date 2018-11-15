@@ -21,7 +21,7 @@ def scan_wifi_networks():
     return ap_array
 
 os.system('iwconfig wlan0 mode Managed')
-wifi_scan=scan_wifi_networks()
+wifi_ap_array=scan_wifi_networks()
 os.system('/etc/init.d/hostapd restart')
 
 @app.route('/login')
