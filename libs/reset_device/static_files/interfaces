@@ -10,7 +10,7 @@ iface usb0 inet static
 auto wlan0
 allow-hotplug wlan0
 iface wlan0 inet static
-    address=10.0.0.1
-    network=10.0.0.0
-    broadcast=10.0.0.255
-    netmask=255.255.255.0
+    address 10.0.0.1
+    network 10.0.0.0
+    broadcast 10.0.0.255
+    netmask 255.255.255.0
