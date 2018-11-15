@@ -31,10 +31,10 @@ def login():
     #os.system('/etc/init.d/hostapd restart')
     return render_template('app.html', wifi_ap_array = wifi_ap_array)
 
-@app.route('/', defaults={'path':''})
+@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):
-    return redirect("http://login.com/login")
+    return redirect ("http://login.com/login")
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
