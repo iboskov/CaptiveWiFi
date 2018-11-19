@@ -92,8 +92,8 @@ def create_wpa_supplicant(ssid, wifi_key):
     temp_conf_file.write('\n')
     temp_conf_file.write('auto wlan0\n')
     temp_conf_file.write('iface wlan0 inet dhcp\n')
-    temp_conf_file.write('wpa-ssid' + ssid + '\n')
-    temp_conf_file.write('wpa-psk' + wifi_key + '\n')
+    temp_conf_file.write('wpa-ssid ' + ssid + '\n')
+    temp_conf_file.write('wpa-psk ' + wifi_key + '\n')
     temp_conf_file.close
 
     os.system('mv interfaces /etc/network/interfaces')
