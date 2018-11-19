@@ -7,6 +7,8 @@ from threading import Thread
 app = Flask(__name__)
 app.debug = True
 
+os.system('service dnsmasq restart') #because it refuses to start upon boot
+
 def scan_wifi_networks():
     iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
     ap_list, err = iwlist_raw.communicate()
