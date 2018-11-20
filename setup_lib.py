@@ -22,6 +22,8 @@ def copy_configs():
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
 	os.system('mv /etc/network/interfaces /etc/network/interfaces.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/network/')
+	os.system('mv /etc/resolv.conf /etc/resolv.conf.original')
+	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/')
 	os.system('mkdir /etc/cron.raspiwifi')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
