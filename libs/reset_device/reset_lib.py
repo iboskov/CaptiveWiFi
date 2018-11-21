@@ -38,7 +38,7 @@ def is_wifi_active():
 	except urllib.error.URLError as err:
 		wifi_active = False
 	else:
-		wifi_active=True
+		wifi_active = True
 	return wifi_active
 
 def reset_to_host_mode():
