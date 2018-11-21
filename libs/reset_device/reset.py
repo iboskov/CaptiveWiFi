@@ -13,10 +13,15 @@ config_hash = reset_lib.config_file_hash()
 ssid_prefix = config_hash['ssid_prefix'] + " "
 hostapd_reset_required = reset_lib.hostapd_reset_check(ssid_prefix)
 
-
 if hostapd_reset_required == True:
     reset_lib.update_hostapd(ssid_prefix)
     os.system('reboot')
+    
+wifi_conn=reset_lib.is_wifi_active()
+    if wifi_conn:
+        reset_lib.reset_to_host_mode()
+    else:
+        return 0
 
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
