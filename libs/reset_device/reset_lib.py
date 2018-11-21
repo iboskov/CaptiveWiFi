@@ -26,7 +26,7 @@ def hostapd_reset_check(ssid_prefix):
 def update_hostapd(ssid_prefix):
 	os.system('cp -a /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
 
-	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
+	with fileinput.input("/etc/hostapd/hostapd.conf", inplace=True) as file:
 		for line in file:
 			print(line.replace("beaglebone", ssid_prefix), end='')
 			file.close
