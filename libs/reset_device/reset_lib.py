@@ -1,6 +1,7 @@
 import os
 import fileinput
 import subprocess
+import urllib.requests
 
 def config_file_hash():
 	config_file = open('/etc/raspiwifi/raspiwifi.conf')
@@ -32,12 +33,12 @@ def update_hostapd(ssid_prefix):
 			file.close
 
 def is_wifi_active():
-	iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
-	wifi_active = True
-
-	if "Access Point: Not-Associated" in iwconfig_out:
+	try:
+		urllib.request.urlopen("http://google.com")
+	except urllib.error.URLError as err:
 		wifi_active = False
-
+	else:
+		wifi_active=True
 	return wifi_active
 
 def reset_to_host_mode():
