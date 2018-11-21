@@ -17,10 +17,8 @@ if hostapd_reset_required == True:
     os.system('reboot')
     
 wifi_conn=reset_lib.is_wifi_active()
-    if wifi_conn:
+    if wifi_conn != 0:
         reset_lib.reset_to_host_mode()
-    else:
-        return 0
 
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
