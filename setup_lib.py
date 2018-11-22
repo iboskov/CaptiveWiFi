@@ -25,9 +25,9 @@ def copy_configs():
 	os.system('mv /etc/resolv.conf /etc/resolv.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/')
 	os.system('mkdir /etc/cron.raspiwifi')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
-	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
-	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
+	#os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
+	#os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
+	#os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
 	#os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 
