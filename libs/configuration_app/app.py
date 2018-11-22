@@ -100,8 +100,8 @@ def create_wpa_supplicant(ssid, wifi_key):
 
 def set_ap_client_mode():
     os.system('rm /etc/cron.raspiwifi/aphost_bootstrapper')
-    os.system('cp /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
-    os.system('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
+    #os.system('cp /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
+    #os.system('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     #os.system('mv /etc/network/interfaces.original /etc/network/interfaces')
     #os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
