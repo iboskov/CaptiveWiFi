@@ -7,7 +7,7 @@ import socket
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-counter = 0
+#counter = 0
 #serial_last_four = subprocess.check_output(['cat', '/proc/cpuinfo'])[-5:-1].decode('utf-8')
 config_hash = reset_lib.config_file_hash()
 ssid_prefix = config_hash['ssid_prefix'] + " "
