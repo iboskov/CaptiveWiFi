@@ -14,11 +14,16 @@ ssid_prefix = config_hash['ssid_prefix'] + " "
 hostapd_reset_required = reset_lib.hostapd_reset_check(ssid_prefix)
 
 def ipaddr():
-    try:
-        ip=[l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
-    except:
-        ip=""
-    return ip
+    interface = "wlan0"
+    x = subprocess.check_output(['ifconfig', interface]).decode("utf-8")
+    #for line in x.splitlines():
+    if "inet addr" in x:
+        line = x.split("\n")[1]
+        t = line.split(":")[1]
+        ip = t.split(" ")[0]
+        return ip
+    else:
+        return False
 
 if hostapd_reset_required == True:
     reset_lib.update_hostapd(ssid_prefix)
@@ -27,7 +32,7 @@ if hostapd_reset_required == True:
 wifi_conn=reset_lib.is_wifi_active()
 address=ipaddr()
 with open("/etc/resolv.conf") as file:
-    if 'nameserver 10.0.0.1' in file.read() and address != "":
+    if 'nameserver 10.0.0.1' in file.read() and address == "10.0.0.1":
         pass
     else:
         if wifi_conn == False:
