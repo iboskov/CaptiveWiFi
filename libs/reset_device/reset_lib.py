@@ -1,7 +1,7 @@
 import os
 import fileinput
 import subprocess
-import urllib.request
+import urllib.request, urllib.error
 
 def config_file_hash():
 	config_file = open('/etc/raspiwifi/raspiwifi.conf')
