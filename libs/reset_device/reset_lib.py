@@ -1,6 +1,5 @@
 import os
 import fileinput
-import subprocess
 import urllib.request, urllib.error
 import time
 
