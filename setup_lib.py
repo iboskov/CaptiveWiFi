@@ -1,4 +1,5 @@
 import os
+import fileinput
 
 def install_prereqs():
 	os.system('clear')
@@ -15,6 +16,7 @@ def copy_configs():
 	os.system('mkdir /usr/lib/raspiwifi')
 	os.system('mkdir /etc/raspiwifi')
 	os.system('cp -a libs/* /usr/lib/raspiwifi/')
+	os.system('cp /usr/lib/raspiwifi/reset_device/reset_lib.py /usr/lib/raspiwifi/configuration_app/')
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
@@ -31,7 +33,13 @@ def copy_configs():
 	#os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
 	#os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
-
+	
+	with fileinput.input("/etc/default/hostapd", inplace=True) as file:
+    		for line in file:
+        		print(line.replace('#DAEMON_CONF=""', 'DAEMON_CONF="/etc/hostapd/hostapd.conf"'), end='')
+    		file.close()
+	
+	
 def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice):
 	if entered_ssid != "":
 		os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
