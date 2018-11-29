@@ -57,4 +57,5 @@ def reset_to_host_mode():
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/')
+	os.system('touch /etc/APMODE')
 	os.system('reboot')
