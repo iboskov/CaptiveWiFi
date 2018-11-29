@@ -52,7 +52,7 @@ def login():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):
-    return redirect("http://login.com/login")
+    return redirect("http://lgtc.local/login")
 
 
 @app.route('/manual_ssid_entry')
