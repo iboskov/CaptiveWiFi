@@ -33,16 +33,17 @@ def update_hostapd(ssid_prefix):
 		file.close()
 
 def is_wifi_active():
-	counter=0
-	while counter<10:
+	counter = 0
+	while counter <1 0:
 		try:
 			urllib.request.urlopen("http://google.com")
 		except urllib.error.URLError as err:
 			wifi_active = False
 		else:
 			wifi_active = True
-		time.sleep(3)
-		counter=counter+1
+			break
+		time.sleep(10)
+		counter = counter+1
 	return wifi_active
 
 def reset_to_host_mode():
