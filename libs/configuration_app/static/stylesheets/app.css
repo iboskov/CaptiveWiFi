@@ -10,19 +10,19 @@ padding:0;
 }
 
 body{
-    background-color: #000;
+    background-color: #7c7e82 ;
     margin:0;
-    color: white;
+    color: #ebf8cb;
 }
 
 div#mainContent{
     padding:.3em;
-    background-color: #000;
+    background-color: lightgray;
     width: 100%;
     margin: 0 auto;
     text-align: center;
     font-size: 3.5rem;
-    color: #fff;
+    color: #4e5259;
 }
 
 div#mainContent h1 {
@@ -56,16 +56,17 @@ li label {
 
 li.wifiNetwork {
     position: relative;
+    color: #fff;
     margin: 0;
 }
 
 li.wifiNetwork:after {
     content: '▼';
     position: absolute;
-    width: 25px;
-    color: #deab04;
+    width: 50px;
+    color: #86c3f0;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 2rem;
     right: 0px;
     top: 40%;
     border-radius: 3px;
@@ -76,8 +77,8 @@ li.wifiNetwork:after {
 select.wifiNetworkInputs {
     position: relative;
     width: 100%;
-    background: #111;
-    color: #999;
+    background: #0006;
+    color: #afcef6;
     border: none;
     outline: none;
     font-size: 1.5rem;
@@ -95,8 +96,8 @@ select.wifiNetworkInputs {
     width: 100%;
     padding:1em;
     font-size: 1.4rem;
-    color: #999;
-    background: #111;
+    color: ;
+    background: #0006;
     border:#999 solid 1px;
 }
 
@@ -104,25 +105,28 @@ select.wifiNetworkInputs {
     width: 100%;
     margin:2em 0;
     padding:.5em;
-    background-color: #deab04;
+    background-color:#635a58;
     font-size: 2rem;
-    color: #fff;
+    color: #e4cc91;
 }
 
 .manualSSIDEntry{
-	font-size: 1rem;
-	color: #fff;
+	font-size: 1.3rem;
+	color: #4e5259;
 }
 
 div#saveCredentialsOutput{
+  padding:.3em;
   width: 60%;
   margin: 0 0 0 20%;
+  background-color: lightgray;
+  font-size: 2rem;
+  color: #4e5259;
   text-align: center;
-  font-size: 1.7em;
 }
 
 .saveCredentialsSSID{
-  color: #deab04;
+  color: #7489bf;
   font-size: 2em;
 }
 
@@ -135,7 +139,7 @@ div#saveCredentialsOutput{
 .wifiIcon, .wifiIcon:before {
     display: inline-block;
     border: 40px double transparent;
-    border-top-color: currentColor;
+    border-top-color: #7489bf;
     border-radius: 50%;
 }
 .wifiIcon:before {
@@ -157,7 +161,7 @@ div#saveCredentialsOutput{
         content: '▼';
         position: absolute;
         width: 50px;
-        color: #deab04;
+        color: #86c3f0;
         font-weight: bold;
         font-size: 2rem;
         right: 0px;
