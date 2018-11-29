@@ -27,6 +27,8 @@ def copy_configs():
 	os.system('mv /etc/resolv.conf /etc/resolv.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.service /etc/systemd/system/')
+	os.system('systemctl daemon-reload')
+	os.system('systemctl enable raspiwifi')
 	os.system('touch /etc/APMODE')
 	#os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('chmod +x /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper')
