@@ -1,0 +1,9 @@
+[Unit]
+Description=service for headless configuration
+After=network-online.target
+
+[Service]
+ExecStart=/usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper
+
+[Install]
+WantedBy=multi-user.target
