@@ -53,7 +53,7 @@ def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay,
 	else:
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
 			for line in file:
-				print(line.replace("ssid_prefix=LGTC-AP", "ssid_prefix=LGTC " + id), end='')
+				print(line.replace("ssid_prefix=LGTC-AP", "ssid_prefix=LGTC_" + id), end='')
 			file.close()
 		
 	if auto_config_choice.lower() == "y":
