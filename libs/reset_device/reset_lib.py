@@ -34,7 +34,7 @@ def update_hostapd(ssid_prefix):
 
 def is_wifi_active():
 	counter = 0
-	while counter <1 0:
+	while counter <10:
 		try:
 			urllib.request.urlopen("http://google.com")
 		except urllib.error.URLError as err:
