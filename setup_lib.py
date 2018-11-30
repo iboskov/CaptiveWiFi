@@ -34,9 +34,9 @@ def copy_configs():
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 	
 	with fileinput.input("/etc/default/hostapd", inplace=True) as file:
-    		for line in file:
-        		print(line.replace('#DAEMON_CONF=""', 'DAEMON_CONF="/etc/hostapd/hostapd.conf"'), end='')
-    		file.close()
+		for line in file:
+			print(line.replace('#DAEMON_CONF=""', 'DAEMON_CONF="/etc/hostapd/hostapd.conf"'), end='')
+		file.close()
 	
 		
 def checkid():
@@ -53,8 +53,8 @@ def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay,
 	else:
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
 			for line in file:
-        			print(line.replace("ssid_prefix=LGTC-AP", "ssid_prefix=LGTC " + id), end='')
-    			file.close()
+				print(line.replace("ssid_prefix=LGTC-AP", "ssid_prefix=LGTC " + id), end='')
+			file.close()
 		
 	if auto_config_choice.lower() == "y":
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
