@@ -51,7 +51,9 @@ def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay,
 	if entered_ssid != "":
 		os.system('sed -i \'s/LGTC-AP/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
 	else:
-		os.system('sed -i \'s/LGTC-AP/' + id + '/\' /etc/raspiwifi/raspiwifi.conf')
+		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
+			for line in file:
+				print(line.replace('ssid=LGTC-AP', 'ssid=LGTC_' + id), end='')
 	if auto_config_choice.lower() == "y":
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_delay != "":
