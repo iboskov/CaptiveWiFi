@@ -42,7 +42,7 @@ def copy_configs():
 def checkid(): #function to get the machine id
 	with open ('/etc/machine-id') as file: #open the file machine-id
 		line = file.readline().strip() #read only the first line of the file and strip the newline
-		return line[-7:] #return the last seven letters from the line
+		return line[-8:] #return the last eight letters from the line
 
 		
 id = checkid() #save the output of checkid() as a string variable 
