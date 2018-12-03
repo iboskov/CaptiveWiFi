@@ -13,32 +13,32 @@ os.system('service dnsmasq restart')  # because it refuses to start upon boot
 
 
 def scan_wifi_networks():
-    iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
+    iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE) #run the command iwlist scan
     ap_list, err = iwlist_raw.communicate()
-    ap_array = []
+    ap_array = [] #create a list where the output of the command will be saved
 
     for line in ap_list.decode('utf-8').rsplit('\n'):
-        if 'ESSID' in line:
-            if 'x00' in line:
+        if 'ESSID' in line: #find the ESSID in everyline
+            if 'x00' in line: #if there is an ESSID which has x00 as a name than skip it (this is a hidden ESSID)
                 pass
             else:
                 ap_ssid = line[27:-1]
-                if ap_ssid != '':
+                if ap_ssid != '': #save every ESSID that is not an empty string
                     ap_array.append(ap_ssid)
                 
     return ap_array
 
-config_hash = reset_lib.config_file_hash()
+config_hash = reset_lib.config_file_hash() 
 ssid_prefix = config_hash['ssid_prefix'] + " "
 hostapd_reset_required = reset_lib.hostapd_reset_check(ssid_prefix)
 
-if hostapd_reset_required == True:
-    reset_lib.update_hostapd(ssid_prefix)
+if hostapd_reset_required == True: #check if the APname of the hostapd and the APname of the raspiwifi.conf are the same
+    reset_lib.update_hostapd(ssid_prefix) #if not, overwrite hostapd to have the same name and reboot the device
     os.system('reboot')
 
-os.system('iwconfig wlan0 mode Managed')
-wifi_ap_array = scan_wifi_networks()
-os.system('/etc/init.d/hostapd restart')
+os.system('iwconfig wlan0 mode Managed') #put the wlan0 interface in Managed mode so that is able to scan wifi networks
+wifi_ap_array = scan_wifi_networks() #save the output of the scan_wifi_networks as a list
+os.system('/etc/init.d/hostapd restart') #restart the hostapd service so that the AP will be shown
 
 
 @app.route('/login')
@@ -46,8 +46,8 @@ def login():
     return render_template('app.html', wifi_ap_array=wifi_ap_array)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/', defaults={'path': ''}) #this is where the redirection happens
+@app.route('/<path:path>') #redirect evry url with its subpaths to the one below
 def index(path):
     return redirect("http://lgtc.local/login")
 
@@ -108,12 +108,12 @@ def set_ap_client_mode():
 
 
 if __name__ == '__main__':
-    if os.path.exists('/usr/lib/raspiwifi/APMODE') is True:
+    if os.path.exists('/usr/lib/raspiwifi/APMODE') is True: #check if the file APMODE exists
         config_hash = reset_lib.config_file_hash()
-        app.run(host = '0.0.0.0', port = int(config_hash['server_port']))
+        app.run(host = '0.0.0.0', port = int(config_hash['server_port'])) #if the file exists that means that the device is booted in host mode and waiting to be configured
     else:
-        wifi_conn = reset_lib.is_wifi_active()
-        if wifi_conn == True:
+        wifi_conn = reset_lib.is_wifi_active() #if the file does not exist that means the device was booted in client mode
+        if wifi_conn == True: #check if the device has internet connection, and if it does, exit
             sys.exit()
         else:
-            reset_lib.reset_to_host_mode()
+            reset_lib.reset_to_host_mode() #if the device does not have internet connection reset it to host mode and reconfigure it
