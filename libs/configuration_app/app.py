@@ -41,7 +41,7 @@ wifi_ap_array = scan_wifi_networks() #save the output of the scan_wifi_networks 
 os.system('/etc/init.d/hostapd restart') #restart the hostapd service so that the AP will be shown
 
 
-@app.route('/login')
+@app.route('/setup')
 def login():
     return render_template('app.html', wifi_ap_array=wifi_ap_array)
 
@@ -49,7 +49,7 @@ def login():
 @app.route('/', defaults={'path': ''}) #this is where the redirection happens
 @app.route('/<path:path>') #redirect evry url with its subpaths to the one below
 def index(path):
-    return redirect("http://lgtc.local/login")
+    return redirect("http://10.0.0.1/setup")
 
 
 @app.route('/manual_ssid_entry')
