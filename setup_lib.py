@@ -47,28 +47,13 @@ def checkid():
 		
 id = checkid()
 	
-def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice):
+def update_main_config_file(entered_ssid, server_port_choice):
 	if entered_ssid != "":
 		os.system('sed -i \'s/LGTC-AP/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
 	else:
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
 			for line in file:
 				print(line.replace('ssid_prefix=LGTC-AP', 'ssid_prefix=LGTC_' + id), end='')
-	if auto_config_choice.lower() == "y":
-		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
-			for line in file:
-				print(line.replace('auto_config=0', 'auto_config=1'), end='')
-		#os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
-	if auto_config_delay != "":
-		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
-			for line in file:
-				print(line.replace('auto_config_delay=300', 'auto_config_delay=' + auto_config_delay), end='')
-		#os.system('sed -i \'s/auto_config_delay=300/auto_config_delay=' + auto_config_delay + '/\' /etc/raspiwifi/raspiwifi.conf')
-	if ssl_enabled_choice.lower() == "y":
-		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
-			for line in file:
-				print(line.replace('ssl_enabled=0', 'ssl_enabled=1'), end='')
-		#os.system('sed -i \'s/ssl_enabled=0/ssl_enabled=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if server_port_choice != "":
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file:
 			for line in file:
