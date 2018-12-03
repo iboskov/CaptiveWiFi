@@ -41,7 +41,7 @@ def copy_configs():
 		
 def checkid():
 	with open ('/etc/machine-id') as file:
-		line = file.readlina().strip()
+		line = file.readline().strip()
 		return line[-7:]
 
 		
