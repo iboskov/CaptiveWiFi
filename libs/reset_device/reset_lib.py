@@ -46,7 +46,7 @@ def is_wifi_active(): #function that checks if there is active internet connecti
 		counter = counter+1
 	return wifi_active
 
-def reset_to_host_mode():
+def reset_to_host_mode(): #reset the device in access point mode
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/network/')
