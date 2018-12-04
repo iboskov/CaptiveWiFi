@@ -79,7 +79,7 @@ def save_credentials():
 ######## FUNCTIONS ##########
 
 
-def create_wpa_supplicant(ssid, wifi_key):
+def create_wpa_supplicant(ssid, wifi_key): #function that creates a new network interfaces file that will be used for the new wifi network
     temp_conf_file = open('interfaces', 'w')
 
     temp_conf_file.write('auto lo\n')
@@ -100,7 +100,7 @@ def create_wpa_supplicant(ssid, wifi_key):
     os.system('mv interfaces /etc/network/interfaces')
 
 
-def set_ap_client_mode():
+def set_ap_client_mode(): #boot the device in client mode and remove the flag (APMODE)
     os.system('rm /etc/cron.raspiwifi/aphost_bootstrapper')
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     os.system('rm -rf /usr/lib/raspiwifi/APMODE')
