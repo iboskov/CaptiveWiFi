@@ -15,7 +15,7 @@ def install_prereqs():
 def copy_configs():
 	os.system('mkdir /usr/lib/raspiwifi')
 	os.system('mkdir /etc/raspiwifi')
-	os.system('cp -a libs/* /usr/lib/raspiwifi/')
+	os.system('cp -a /home/logatec/RaspiWiFi/libs/* /usr/lib/raspiwifi/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/reset_lib.py /usr/lib/raspiwifi/configuration_app/')
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
