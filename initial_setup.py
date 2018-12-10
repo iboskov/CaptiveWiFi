@@ -26,7 +26,6 @@ if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
 	setup_lib.update_main_config_file(entered_ssid, server_port_choice)
-	os.system("touch /home/logatec/initial_boot")
 else:
 	print()
 	print()
@@ -50,4 +49,5 @@ print("#####################################")
 print()
 print()
 print("Initial setup is complete. A reboot is required to start in WiFi configuration mode...")
+os.system('rm -rf /home/logatec/initialboot')
 os.system('reboot')
