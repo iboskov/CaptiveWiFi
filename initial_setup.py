@@ -24,5 +24,5 @@ else:
 
 os.system('clear')
 print()
-os.system('rm -rf /home/logatec/initialboot')
+os.system('rm -rf /home/logatec/RaspiWiFi/initialboot')
 os.system('reboot')
