@@ -24,6 +24,12 @@ Pi's serial number). No input devices or displays necessary. Otherwise this is
 a base install of the current Raspbian Stretch, up to date as of the date of
 this release.
 
+BEFORE INITIAL INSTALLATION:
+== In /home/logatec/ create an empty file initialboot that will be used as a flag
+to show if this is the first time booting
+== In /home/logatec/ create the script initial.sh and give chmod +x privileges
+== In /etc/systemd/system/ create the initialboot.service
+
 
  SCRIPT-BASED INSTALLATION INSTRUCTIONS:
 
