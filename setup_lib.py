@@ -1,16 +1,14 @@
 import os
 import fileinput
 
-def install_prereqs():
-	os.system('clear')
-	os.system('apt update')
-	os.system('clear')
-	os.system('apt install python3 python3-pip dnsmasq hostapd -y')
-	os.system('clear')
-	print("Installing Flask web server...")
-	print()
-	os.system('pip3 install flask')
-	os.system('clear')
+#def install_prereqs():
+	#os.system('clear')
+	#os.system('apt update')
+	#os.system('clear')
+	#os.system('apt install python3 python3-pip dnsmasq hostapd -y')
+	
+	#os.system('pip3 install flask')
+	#os.system('clear')
 
 def copy_configs():
 	os.system('mkdir /usr/lib/raspiwifi')
