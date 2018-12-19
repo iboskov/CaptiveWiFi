@@ -26,8 +26,6 @@ this release.
 
 BEFORE INITIAL INSTALLATION:
 == Run "apt install python3 python3-pip dnsmasq hostapd -y" and "pip3 install flask"
-== In /home/logatec/ create an empty file initialboot that will be used as a flag
-to show if this is the first time booting
 == In /home/logatec/ create the script initial.sh and give chmod +x privileges
 == In /etc/systemd/system/ create the initialboot.service
 
