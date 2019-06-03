@@ -18,6 +18,7 @@ if(install_ans.lower() == 'y'):
 	#setup_lib.install_prereqs()
 	setup_lib.copy_configs()
 	setup_lib.update_main_config_file(entered_ssid, server_port_choice)
+	os.system('systemctl start raspiwifi.service')
 else:
 	print()
 	sys.exit()
