@@ -34,7 +34,8 @@ hostapd_reset_required = reset_lib.hostapd_reset_check(ssid_prefix)
 
 if hostapd_reset_required == True: #check if the APname of the hostapd and the APname of the raspiwifi.conf are the same
     reset_lib.update_hostapd(ssid_prefix) #if not, overwrite hostapd to have the same name and reboot the device
-    os.system('reboot')
+    #os.system('reboot')
+    os.system('service hostapd restart')
 
 os.system('iwconfig wlan0 mode Managed') #put the wlan0 interface in Managed mode so that is able to scan wifi networks
 wifi_ap_array = scan_wifi_networks() #save the output of the scan_wifi_networks as a list
