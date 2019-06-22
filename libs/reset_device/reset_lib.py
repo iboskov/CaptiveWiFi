@@ -29,7 +29,7 @@ def update_hostapd(ssid_prefix):
 
 	with fileinput.input("/etc/hostapd/hostapd.conf", inplace=True) as file:
 		for line in file:
-			print(line.replace("beaglebone", ssid_prefix), end='') #check if the APname is the same as the entered_ssid, if not replace it
+			print(line.replace("LGTC-AP", ssid_prefix), end='') #check if the APname is the same as the entered_ssid, if not replace it
 		file.close()
 
 def is_wifi_active(): #function that checks if there is active internet connection
