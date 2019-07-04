@@ -4,7 +4,6 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-User=root
 ExecStart=/usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper
 RemainAfterExit=yes
 
