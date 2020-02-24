@@ -1,15 +1,6 @@
 import os
 import fileinput
 
-#def install_prereqs():
-	#os.system('clear')
-	#os.system('apt update')
-	#os.system('clear')
-	#os.system('apt install python3 python3-pip dnsmasq hostapd -y')
-	
-	#os.system('pip3 install flask')
-	#os.system('clear')
-
 def copy_configs():
 	os.system('mkdir /usr/lib/raspiwifi')
 	os.system('mkdir /etc/raspiwifi')
@@ -56,4 +47,3 @@ def update_main_config_file(entered_ssid, server_port_choice):
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file: #open the raspiwifi.conf file
 			for line in file: #read the file line by line
 				print(line.replace('server_port=80', 'server_port=' + server_port_choice), end='') #when the string server_port=80 is found overwrite it with user's inputed port
-		#os.system('sed -i \'s/server_port=80/server_port=' + server_port_choice + '/\' /etc/raspiwifi/raspiwifi.conf')
