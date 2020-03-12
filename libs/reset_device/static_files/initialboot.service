@@ -1,0 +1,9 @@
+[Unit]
+Description=checking initial boot
+
+[Service]
+Type=oneshot
+ExecStart=/home/logatec/CaptiveWiFi/initial.sh
+
+[Install]
+WantedBy=multi-user.target

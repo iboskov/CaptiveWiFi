@@ -6,6 +6,8 @@ from threading import Thread
 import reset_lib
 import sys
 
+startT=time.time()
+
 app = Flask(__name__)
 app.debug = True
 
@@ -109,12 +111,15 @@ def set_ap_client_mode(): #boot the device in client mode and remove the flag (A
 
 
 if __name__ == '__main__':
+    startP=time.time()
     if os.path.exists('/usr/lib/raspiwifi/APMODE') is True: #check if the file APMODE exists
         config_hash = reset_lib.config_file_hash()
         app.run(host = '0.0.0.0', port = int(config_hash['server_port'])) #if the file exists that means that the device is booted in host mode and waiting to be configured
     else:
         wifi_conn = reset_lib.is_wifi_active() #if the file does not exist that means the device was booted in client mode
         if wifi_conn == True: #check if the device has internet connection, and if it does, exit
+            endP=time.time()
+            print(endP-startP)
             sys.exit()
         else:
             reset_lib.reset_to_host_mode() #if the device does not have internet connection reset it to host mode and reconfigure it
