@@ -3,8 +3,9 @@
 import os
 import sys
 import setup_lib
+import time
 
-
+startT=time.time()
 if os.getuid():
     sys.exit('You need root access to install!')
 
@@ -28,4 +29,6 @@ else:
 os.system('clear')
 print()
 os.system('rm -rf /home/logatec/RaspiWiFi/initialboot')
+endT=time.time()
+print(endT-startT, file=open("time.txt", "a"))
 os.system('reboot')

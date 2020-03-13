@@ -6,8 +6,7 @@ from threading import Thread
 import reset_lib
 import sys
 
-startT=time.time()
-
+appst=time.time()
 app = Flask(__name__)
 app.debug = True
 
@@ -67,8 +66,7 @@ def save_credentials():
 
     create_wpa_supplicant(ssid, wifi_key)
 
-    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
-    # the response from getting to the browser
+    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent the response from getting to the browser
     def sleep_and_start_ap():
         time.sleep(2)
         set_ap_client_mode()
@@ -109,7 +107,8 @@ def set_ap_client_mode(): #boot the device in client mode and remove the flag (A
     os.system('rm -rf /usr/lib/raspiwifi/APMODE')
     os.system('reboot')
 
-
+appet=time.time()
+print(appet-appst, file=open("apptime.txt", "a"))
 if __name__ == '__main__':
     startP=time.time()
     if os.path.exists('/usr/lib/raspiwifi/APMODE') is True: #check if the file APMODE exists
@@ -119,7 +118,7 @@ if __name__ == '__main__':
         wifi_conn = reset_lib.is_wifi_active() #if the file does not exist that means the device was booted in client mode
         if wifi_conn == True: #check if the device has internet connection, and if it does, exit
             endP=time.time()
-            print(endP-startP)
+            print(endP-startP, file=open("appmain.txt", "a"))
             sys.exit()
         else:
             reset_lib.reset_to_host_mode() #if the device does not have internet connection reset it to host mode and reconfigure it
