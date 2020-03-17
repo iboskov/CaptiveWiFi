@@ -28,7 +28,7 @@ else:
 
 os.system('clear')
 print()
-os.system('rm -rf /home/logatec/RaspiWiFi/initialboot')
+os.system('rm -rf /home/logatec/CaptiveWiFi/initialboot')
 endT=time.time()
 print(endT-startT, file=open("initial.txt", "a"))
 os.system('reboot')
