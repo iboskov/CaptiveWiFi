@@ -2,25 +2,25 @@ import os
 import fileinput
 
 def copy_configs():
-	os.system('mkdir /usr/lib/raspiwifi')
-	os.system('mkdir /etc/raspiwifi')
-	os.system('cp -a /home/logatec/CaptiveWiFi/libs/* /usr/lib/raspiwifi/')
-	os.system('cp /usr/lib/raspiwifi/reset_device/reset_lib.py /usr/lib/raspiwifi/configuration_app/')
-	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-	os.system('rm -f ./tmp/*')
-	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
-	os.system('mv /etc/network/interfaces /etc/network/interfaces.original')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/network/')
-	os.system('mv /etc/resolv.conf /etc/resolv.conf.original')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.service /etc/systemd/system/')
-	os.system('systemctl daemon-reload')
+	os.system("mkdir /usr/lib/raspiwifi")
+	os.system("mkdir /etc/raspiwifi")
+	os.system("cp -a /home/logatec/CaptiveWiFi/libs/* /usr/lib/raspiwifi/")
+	os.system("cp /usr/lib/raspiwifi/reset_device/reset_lib.py /usr/lib/raspiwifi/configuration_app/")
+	os.system("rm -f /etc/wpa_supplicant/wpa_supplicant.conf")
+	os.system("rm -f ./tmp/*")
+	os.system("mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original")
+	os.system("cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/")
+	os.system("cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/")
+	os.system("mv /etc/network/interfaces /etc/network/interfaces.original")
+	os.system("cp /usr/lib/raspiwifi/reset_device/static_files/interfaces /etc/network/")
+	os.system("mv /etc/resolv.conf /etc/resolv.conf.original")
+	os.system("cp /usr/lib/raspiwifi/reset_device/static_files/resolv.conf /etc/")
+	os.system("cp /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.service /etc/systemd/system/")
+	os.system("systemctl daemon-reload")
 	#os.system('systemctl enable raspiwifi')
-	os.system('touch /usr/lib/raspiwifi/APMODE')
-	os.system('chmod +x /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper')
-	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi/')
+	os.system("touch /usr/lib/raspiwifi/APMODE")
+	os.system("chmod +x /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper")
+	os.system("mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi/")
 	
 	with fileinput.input("/etc/default/hostapd", inplace=True) as file:
 		for line in file:
@@ -38,7 +38,7 @@ id = checkid() #save the output of checkid() as a string variable
 	
 def update_main_config_file(entered_ssid, server_port_choice):
 	if entered_ssid != "": #check if entered_ssid is empty, if so default APname is LGTC-AP
-		os.system('sed -i \'s/LGTC-AP/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
+		os.system("sed -i \'s/LGTC-AP/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf")
 	else:
 		with fileinput.input("/etc/raspiwifi/raspiwifi.conf", inplace=True) as file: #open the raspiwifi.conf file
 			for line in file: #read the file line by line

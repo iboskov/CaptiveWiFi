@@ -10,7 +10,7 @@ if os.getuid():
     sys.exit('You need root access to install!')
 
 
-os.system('clear')
+os.system("clear")
 entered_ssid = ""
 print()
 server_port_choice = ""
@@ -26,9 +26,9 @@ else:
 	print()
 	sys.exit()
 
-os.system('clear')
+os.system("clear")
 print()
-os.system('rm -rf /home/logatec/CaptiveWiFi/initialboot')
+os.system("rm -rf /home/logatec/CaptiveWiFi/initialboot")
 endT=time.time()
 print(endT-startT, file=open("initial.txt", "a"))
-os.system('reboot')
+os.system("reboot")
