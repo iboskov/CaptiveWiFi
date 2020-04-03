@@ -10,7 +10,8 @@ appst=time.time()
 app = Flask(__name__)
 app.debug = True
 
-os.system('service dnsmasq restart')  # because it refuses to start upon boot
+os.system('service dnsmasq restart')
+os.system('service hostapd restart')  # because it refuses to start upon boot
 
 
 def scan_wifi_networks():
