@@ -3,7 +3,7 @@ tested with the Raspberry Pi B+, Raspberry Pi 3, and Raspberry Pi Zero W.
 
 
 BEFORE INITIAL INSTALLATION:
-== Run "apt install python3 python3-pip dnsmasq hostapd -y" and "pip3 install flask"
+== Run "apt install python3 python3-pip dnsmasq hostapd -y" and "pip3 install flask pexpect"
 == In /home/logatec/ create the script initial.sh and give chmod +x privileges
 == In /etc/systemd/system/ create the initialboot.service
 
